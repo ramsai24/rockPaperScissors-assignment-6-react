@@ -1,3 +1,7 @@
+import {Component} from 'react'
+import GameContext from './Context/GameContext'
+import Header from './Components/Header'
+import Game from './Components/Game'
 import './App.css'
 
 const choicesList = [
@@ -18,6 +22,33 @@ const choicesList = [
   },
 ]
 
-const App = () => <div>Hello World</div>
+class App extends Component {
+  state = {score: 0, userChoice: '', choicesList, userComponent: false}
+
+  makeUserChoice = () => {}
+
+  render() {
+    const {score, userComponent} = this.state
+
+    return (
+      <GameContext.Provider
+        value={{
+          choicesList,
+          systemChoice:
+            choicesList[Math.floor(Math.random() * choicesList.length)],
+          score,
+
+          makeUserChoice: this.makeUserChoice,
+          userComponent,
+        }}
+      >
+        <div className="app-container">
+          <Header />
+          <Game />
+        </div>
+      </GameContext.Provider>
+    )
+  }
+}
 
 export default App
