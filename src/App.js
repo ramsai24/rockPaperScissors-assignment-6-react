@@ -23,23 +23,32 @@ const choicesList = [
 ]
 
 class App extends Component {
-  state = {score: 0, userChoice: '', choicesList, userComponent: false}
+  state = {score: 0, userChoice: '', userComponent: false}
 
-  makeUserChoice = () => {}
+  makeUserChoice = imageUrl => {
+    this.setState({userChoice: imageUrl, userComponent: true})
+  }
+
+  playAgain = () => {
+    this.setState({userComponent: false})
+  }
 
   render() {
-    const {score, userComponent} = this.state
+    const {score, userComponent, userChoice} = this.state
 
     return (
       <GameContext.Provider
         value={{
           choicesList,
           systemChoice:
-            choicesList[Math.floor(Math.random() * choicesList.length)],
+            choicesList[Math.floor(Math.random() * choicesList.length)]
+              .imageUrl,
           score,
 
           makeUserChoice: this.makeUserChoice,
           userComponent,
+          userChoice,
+          playAgain: this.playAgain,
         }}
       >
         <div className="app-container">

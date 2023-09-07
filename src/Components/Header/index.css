@@ -4,4 +4,6 @@
   align-items: center;
   margin: 30px;
   border: 2px solid #ffffff;
+  padding: 40px;
+  flex-shrink: 0;
 }
