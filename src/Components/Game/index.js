@@ -10,12 +10,11 @@ const Game = () => (
         choicesList,
         makeUserChoice,
         userComponent,
-        score,
+
         userChoice,
         playAgain,
+        status,
       } = value
-
-      console.log(systemChoice, userChoice, score, userComponent)
 
       const resultComponent = () => (
         <div className="result-container">
@@ -28,6 +27,7 @@ const Game = () => (
             <img className="coin-img" src={systemChoice} alt="system" />
           </div>
           <div>
+            <h1>{status}</h1>
             <button type="button" onClick={playAgain}>
               PLAY AGAIN
             </button>
@@ -43,7 +43,7 @@ const Game = () => (
             <ul className="coins-container">
               {choicesList.map(each => {
                 const updateUserChoice = () => {
-                  makeUserChoice(each.imageUrl)
+                  makeUserChoice(each)
                 }
 
                 return (

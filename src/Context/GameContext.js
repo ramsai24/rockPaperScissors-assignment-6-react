@@ -8,6 +8,9 @@ const GameContext = React.createContext({
   userComponent: false,
   makeUserChoice: () => {},
   playAgain: () => {},
+  status: '',
+  userId: '',
+  systemId: '',
 })
 
 export default GameContext

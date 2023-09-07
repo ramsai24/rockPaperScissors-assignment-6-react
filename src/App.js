@@ -22,11 +22,64 @@ const choicesList = [
   },
 ]
 
-class App extends Component {
-  state = {score: 0, userChoice: '', userComponent: false}
+const randomNum = Math.floor(Math.random() * choicesList.length)
 
-  makeUserChoice = imageUrl => {
-    this.setState({userChoice: imageUrl, userComponent: true})
+class App extends Component {
+  state = {
+    score: 0,
+    userChoice: '',
+    userComponent: false,
+    userId: '',
+    systemId: choicesList[randomNum].id,
+    systemChoice: choicesList[randomNum].imageUrl,
+    status: '',
+  }
+
+  makeUserChoice = each => {
+    const randomNumber = Math.floor(Math.random() * choicesList.length)
+    this.setState({
+      userChoice: each.imageUrl,
+      userId: each.id,
+      userComponent: true,
+      systemId: choicesList[randomNumber].id,
+      systemChoice: choicesList[randomNumber].imageUrl,
+    })
+    const {systemId} = this.state
+    console.log(each.id, systemId)
+
+    if (each.id === 'PAPER' && systemId === 'ROCK') {
+      this.setState(prevState => ({
+        score: prevState.score + 1,
+        status: 'YOU WON',
+      }))
+    } else if (each.id === 'PAPER' && systemId === 'SCISSORS') {
+      this.setState(prevState => ({
+        score: prevState.score - 1,
+        status: 'YOU LOSE',
+      }))
+    } else if (each.id === 'SCISSORS' && systemId === 'ROCK') {
+      this.setState(prevState => ({
+        score: prevState.score - 1,
+        status: 'YOU LOSE',
+      }))
+    } else if (each.id === 'SCISSORS' && systemId === 'PAPER') {
+      this.setState(prevState => ({
+        score: prevState.score + 1,
+        status: 'YOU WON',
+      }))
+    } else if (each.id === 'ROCK' && systemId === 'PAPER') {
+      this.setState(prevState => ({
+        score: prevState.score - 1,
+        status: 'YOU LOSE',
+      }))
+    } else if (each.id === 'ROCK' && systemId === 'SCISSORS') {
+      this.setState(prevState => ({
+        score: prevState.score + 1,
+        status: 'YOU WON',
+      }))
+    } else {
+      this.setState({status: 'IT IS DRAW'})
+    }
   }
 
   playAgain = () => {
@@ -34,21 +87,30 @@ class App extends Component {
   }
 
   render() {
-    const {score, userComponent, userChoice} = this.state
+    const {
+      score,
+      userId,
+      systemId,
+      userComponent,
+      userChoice,
+      systemChoice,
+      status,
+    } = this.state
 
     return (
       <GameContext.Provider
         value={{
           choicesList,
-          systemChoice:
-            choicesList[Math.floor(Math.random() * choicesList.length)]
-              .imageUrl,
+          systemChoice,
           score,
 
           makeUserChoice: this.makeUserChoice,
           userComponent,
           userChoice,
           playAgain: this.playAgain,
+          systemId,
+          status,
+          userId,
         }}
       >
         <div className="app-container">
