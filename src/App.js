@@ -7,16 +7,19 @@ import './App.css'
 const choicesList = [
   {
     id: 'ROCK',
+    alt: 'rockButton',
     imageUrl:
       'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rock-image.png',
   },
   {
     id: 'SCISSORS',
+    alt: 'scissorsButton',
     imageUrl:
       'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/scissor-image.png',
   },
   {
     id: 'PAPER',
+    alt: 'paperButton',
     imageUrl:
       'https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/paper-image.png',
   },
@@ -31,48 +34,48 @@ class App extends Component {
     userComponent: false,
     userId: '',
     systemId: choicesList[randomNum].id,
-    systemChoice: choicesList[randomNum].imageUrl,
+    systemChoice: choicesList[Math.floor(Math.random() * choicesList.length)],
     status: '',
   }
 
-  makeUserChoice = each => {
+  makeUserChoice = (each, systemChoice) => {
     const randomNumber = Math.floor(Math.random() * choicesList.length)
     this.setState({
       userChoice: each.imageUrl,
       userId: each.id,
       userComponent: true,
-      systemId: choicesList[randomNumber].id,
-      systemChoice: choicesList[randomNumber].imageUrl,
+      //   systemId: choicesList[randomNumber].id,
+      systemChoice: choicesList[Math.floor(Math.random() * choicesList.length)],
     })
-    const {systemId} = this.state
-    console.log(each.id, systemId)
-
-    if (each.id === 'PAPER' && systemId === 'ROCK') {
+    // const {systemId} = this.state
+    // console.log(each.id, systemId)
+    console.log(each.id, systemChoice.id)
+    if (each.id === 'PAPER' && systemChoice.id === 'ROCK') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
       }))
-    } else if (each.id === 'PAPER' && systemId === 'SCISSORS') {
+    } else if (each.id === 'PAPER' && systemChoice.id === 'SCISSORS') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'SCISSORS' && systemId === 'ROCK') {
+    } else if (each.id === 'SCISSORS' && systemChoice.id === 'ROCK') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'SCISSORS' && systemId === 'PAPER') {
+    } else if (each.id === 'SCISSORS' && systemChoice.id === 'PAPER') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
       }))
-    } else if (each.id === 'ROCK' && systemId === 'PAPER') {
+    } else if (each.id === 'ROCK' && systemChoice.id === 'PAPER') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'ROCK' && systemId === 'SCISSORS') {
+    } else if (each.id === 'ROCK' && systemChoice.id === 'SCISSORS') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
