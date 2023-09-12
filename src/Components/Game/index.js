@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import Popup from 'reactjs-popup'
+
 import {RiCloseLine} from 'react-icons/ri'
 import GameContext from '../../Context/GameContext'
 import './index.css'
@@ -36,14 +38,14 @@ class Game extends Component {
             <div className="result-container">
               <div>
                 <h1>You</h1>
-                <img className="coin-img" src={userChoice} alt="user" />
+                <img className="coin-img" src={userChoice} alt="your choice" />
               </div>
               <div>
                 <h1>OPPONENT</h1>
                 <img
                   className="coin-img"
                   src={systemChoice.imageUrl}
-                  alt="system"
+                  alt="opponent choice"
                 />
               </div>
               <div>
@@ -57,56 +59,61 @@ class Game extends Component {
 
           return (
             <div className="game-container">
-              {ruleImage ? (
+              <div>
                 <div>
-                  <div>
-                    {userComponent ? (
-                      resultComponent()
-                    ) : (
-                      <ul className="coins-container">
-                        {choicesList.map(each => {
-                          const updateUserChoice = () => {
-                            makeUserChoice(each, ranChoice)
-                          }
+                  {userComponent ? (
+                    resultComponent()
+                  ) : (
+                    <ul className="coins-container">
+                      {choicesList.map(each => {
+                        const updateUserChoice = () => {
+                          makeUserChoice(each, ranChoice)
+                        }
 
-                          return (
-                            <li key={each.id}>
-                              <button
-                                data-testid={each.alt}
-                                type="button"
-                                onClick={updateUserChoice}
-                              >
-                                <img
-                                  className="coin-img"
-                                  src={each.imageUrl}
-                                  alt={each.id}
-                                />
-                              </button>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    className="rules-button"
-                    onClick={this.ruleImg}
-                  >
-                    Rules
-                  </button>
+                        return (
+                          <li key={each.id}>
+                            <button
+                              data-testid={each.alt}
+                              type="button"
+                              onClick={updateUserChoice}
+                            >
+                              <img
+                                className="coin-img"
+                                src={each.imageUrl}
+                                alt={each.id}
+                              />
+                            </button>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  )}
                 </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.closeBtn}>
-                    <RiCloseLine />
-                  </button>
-                  <img
-                    src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png"
-                    alt="rules"
-                  />
-                </div>
-              )}
+                <Popup
+                  modal
+                  trigger={
+                    <button
+                      type="button"
+                      className="rules-button"
+                      onClick={this.ruleImg}
+                    >
+                      Rules
+                    </button>
+                  }
+                >
+                  {close => (
+                    <div>
+                      <button type="button" onClick={() => close()}>
+                        <RiCloseLine />
+                      </button>
+                      <img
+                        src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png"
+                        alt="rules"
+                      />
+                    </div>
+                  )}
+                </Popup>
+              </div>
             </div>
           )
         }}

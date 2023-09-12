@@ -7,3 +7,7 @@
   padding: 40px;
   flex-shrink: 0;
 }
+
+.score-para {
+  font-family: 'Roboto';
+}

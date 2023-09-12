@@ -10,7 +10,7 @@ const Header = () => (
           <h1>ROCK PAPER SCISSORS</h1>
           <div>
             <p>Score</p>
-            <h1>{score}</h1>
+            <p className="score-para">{`${score}`}</p>
           </div>
         </div>
       )
