@@ -38,44 +38,51 @@ class App extends Component {
     status: '',
   }
 
-  makeUserChoice = (each, systemChoice) => {
+  makeUserChoice = (each, ranChoice) => {
+    const {score} = this.state
+    // console.log(ranChoice)
+    // console.log(
+    //   `userChoice in App Component ${each.id} ======== Score :${score}`,
+    // )
+    // console.log(`ranChoice in App Component ${ranChoice.id}`)
+    // console.log(ranChoice)
     const randomNumber = Math.floor(Math.random() * choicesList.length)
     this.setState({
       userChoice: each.imageUrl,
       userId: each.id,
       userComponent: true,
       //   systemId: choicesList[randomNumber].id,
-      systemChoice: choicesList[Math.floor(Math.random() * choicesList.length)],
+      systemChoice: ranChoice,
     })
     // const {systemId} = this.state
     // console.log(each.id, systemId)
-    console.log(each.id, systemChoice.id)
-    if (each.id === 'PAPER' && systemChoice.id === 'ROCK') {
+    // console.log(each.id, systemChoice.id)
+    if (each.id === 'PAPER' && ranChoice.id === 'ROCK') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
       }))
-    } else if (each.id === 'PAPER' && systemChoice.id === 'SCISSORS') {
+    } else if (each.id === 'PAPER' && ranChoice.id === 'SCISSORS') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'SCISSORS' && systemChoice.id === 'ROCK') {
+    } else if (each.id === 'SCISSORS' && ranChoice.id === 'ROCK') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'SCISSORS' && systemChoice.id === 'PAPER') {
+    } else if (each.id === 'SCISSORS' && ranChoice.id === 'PAPER') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
       }))
-    } else if (each.id === 'ROCK' && systemChoice.id === 'PAPER') {
+    } else if (each.id === 'ROCK' && ranChoice.id === 'PAPER') {
       this.setState(prevState => ({
         score: prevState.score - 1,
         status: 'YOU LOSE',
       }))
-    } else if (each.id === 'ROCK' && systemChoice.id === 'SCISSORS') {
+    } else if (each.id === 'ROCK' && ranChoice.id === 'SCISSORS') {
       this.setState(prevState => ({
         score: prevState.score + 1,
         status: 'YOU WON',
@@ -99,6 +106,11 @@ class App extends Component {
       systemChoice,
       status,
     } = this.state
+
+    console.log(
+      `userChoice in App Component ${userId} ======== Score :${score}`,
+    )
+    console.log(`ranChoice in App Component ${systemChoice.id}`)
 
     return (
       <GameContext.Provider

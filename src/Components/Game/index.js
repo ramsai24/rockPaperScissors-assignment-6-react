@@ -4,7 +4,9 @@ import GameContext from '../../Context/GameContext'
 import './index.css'
 
 class Game extends Component {
-  state = {ruleImage: true}
+  state = {
+    ruleImage: true,
+  }
 
   ruleImg = () => this.setState({ruleImage: false})
 
@@ -26,7 +28,9 @@ class Game extends Component {
             playAgain,
             status,
           } = value
-          console.log(systemChoice, userChoice)
+
+          const ranChoice =
+            choicesList[Math.floor(Math.random() * choicesList.length)]
 
           const resultComponent = () => (
             <div className="result-container">
@@ -62,7 +66,7 @@ class Game extends Component {
                       <ul className="coins-container">
                         {choicesList.map(each => {
                           const updateUserChoice = () => {
-                            makeUserChoice(each, systemChoice, systemId)
+                            makeUserChoice(each, ranChoice)
                           }
 
                           return (
@@ -114,5 +118,7 @@ class Game extends Component {
 export default Game
 
 // console.log(choicesList[Math.floor(Math.random() * choicesList.length)])
-//       console.log(Math.random() * choicesList.length)
+//   console.log(Math.random() * choicesList.length)
 //       console.log(Math.floor(Math.random() * choicesList.length))
+
+//   console.log(`systemChoice in Game Component ${systemChoice.id}`)

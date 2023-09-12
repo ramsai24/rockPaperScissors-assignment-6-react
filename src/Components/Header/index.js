@@ -7,11 +7,7 @@ const Header = () => (
       const {score, choicesList} = value
       return (
         <div className="header-container">
-          <ul>
-            {choicesList.map(each => (
-              <li key={each.id}>{each.id}</li>
-            ))}
-          </ul>
+          <h1>ROCK PAPER SCISSORS</h1>
           <div>
             <p>Score</p>
             <h1>{score}</h1>
