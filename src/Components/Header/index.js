@@ -1,4 +1,5 @@
 import GameContext from '../../Context/GameContext'
+import {Para} from './styleComponent'
 import './index.css'
 
 const Header = () => (
@@ -9,8 +10,10 @@ const Header = () => (
         <div className="header-container">
           <h1>ROCK PAPER SCISSORS</h1>
           <div>
-            <p>Score</p>
-            <p className="score-para">{`${score}`}</p>
+            {/* <p className="score-para"></p> */}
+            <Para className="score-para" fontFamily="Roboto">
+              Score {`${score}`}
+            </Para>
           </div>
         </div>
       )
