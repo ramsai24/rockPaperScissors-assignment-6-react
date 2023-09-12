@@ -49,7 +49,7 @@ class Game extends Component {
                 />
               </div>
               <div>
-                <h1>{status}</h1>
+                <p>{status}</p>
                 <button type="button" onClick={playAgain}>
                   PLAY AGAIN
                 </button>
